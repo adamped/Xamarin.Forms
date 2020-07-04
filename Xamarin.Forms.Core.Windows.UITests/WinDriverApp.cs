@@ -306,20 +306,6 @@ namespace Xamarin.Forms.Core.UITests
 			throw new NotImplementedException();
 		}
 
-
-		public void ScreenshotFailure()
-		{
-			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
-			{
-				string filename = $"{TestContext.CurrentContext.Test.FullName}.png";
-				Screenshot screenshot = _session.GetScreenshot();
-				screenshot.SaveAsFile(filename, ScreenshotImageFormat.Png);
-				var file = new FileInfo(filename);
-
-				TestContext.AddTestAttachment(file.FullName, TestContext.CurrentContext.Test.FullName);
-			}
-		}
-
 		public FileInfo Screenshot(string title)
 		{
 			// TODO hartez 2017/07/18 10:16:56 Verify that this is working; seems a bit too simple	

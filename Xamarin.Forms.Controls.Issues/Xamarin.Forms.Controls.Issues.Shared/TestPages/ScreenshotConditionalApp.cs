@@ -468,17 +468,27 @@ namespace Xamarin.Forms.Controls
 				AppSetup.EndIsolate();
 			}
 
-#if __WINDOWS__
 			ScreenshotFailure();
-#endif
 		}
-
-#if __WINDOWS__
+		
 		public void ScreenshotFailure()
 		{
-			(_app as Core.UITests.WinDriverApp).ScreenshotFailure();
+			if(!TestContext.Parameters.Exists("IncludeScreenShots") ||
+				!Convert.ToBoolean(TestContext.Parameters["IncludeScreenShots"]))
+			{
+				return;
+			}
+
+			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+			{
+				string filename = $"{TestContext.CurrentContext.Test.FullName}.png";
+				Screenshot screenshot = _session.GetScreenshot();
+				screenshot.SaveAsFile(filename, ScreenshotImageFormat.Png);
+				var file = new FileInfo(filename);
+
+				TestContext.AddTestAttachment(file.FullName, TestContext.CurrentContext.Test.FullName);
+			}
 		}
-#endif
 
 #if __IOS__
 
