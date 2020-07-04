@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 #if __IOS__
 using Xamarin.UITest.iOS;
@@ -482,11 +484,12 @@ namespace Xamarin.Forms.Controls
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
 				string filename = $"{TestContext.CurrentContext.Test.FullName}.png";
-				Screenshot screenshot = _session.GetScreenshot();
-				screenshot.SaveAsFile(filename, ScreenshotImageFormat.Png);
-				var file = new FileInfo(filename);
+				FileInfo file = _app.Screenshot(filename);
 
-				TestContext.AddTestAttachment(file.FullName, TestContext.CurrentContext.Test.FullName);
+				if (file != null)
+				{
+					TestContext.AddTestAttachment(file.FullName, TestContext.CurrentContext.Test.FullName);
+				}
 			}
 		}
 

@@ -308,14 +308,12 @@ namespace Xamarin.Forms.Core.UITests
 
 		public FileInfo Screenshot(string title)
 		{
-			// TODO hartez 2017/07/18 10:16:56 Verify that this is working; seems a bit too simple	
 			string filename = $"{title}.png";
 
 			Screenshot screenshot = _session.GetScreenshot();
 			screenshot.SaveAsFile(filename, ScreenshotImageFormat.Png);
 			var file = new FileInfo(filename);
 
-			TestContext.AddTestAttachment(file.FullName, title);
 			return file;
 		}
 
