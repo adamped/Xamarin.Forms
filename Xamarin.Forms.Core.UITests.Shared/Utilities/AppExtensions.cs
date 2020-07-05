@@ -6,6 +6,7 @@ using Xamarin.UITest.Queries;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Xamarin.Forms.Controls.Issues;
+using Xamarin.Forms.Controls;
 #if __IOS__
 using Xamarin.UITest.iOS;
 #endif
@@ -14,6 +15,14 @@ namespace Xamarin.UITest
 {
 	internal static class AppExtensions
 	{
+		public static AppResult WaitForFirstElement(this IApp app, string marked, string timeoutMessage = "Timed out waiting for element...")
+		{
+			if (app is ScreenshotConditionalApp scp)
+				return scp.WaitForFirstElement(marked, timeoutMessage);
+
+			return app.WaitForElement(marked, timeoutMessage).FirstOrDefault();
+		}
+
 		public static T[] QueryUntilPresent<T>(
 			this IApp app,
 			Func<T[]> func,

@@ -45,11 +45,11 @@ namespace Xamarin.Forms.Controls.Issues
 		[Test]
 		public void Bugzilla57317Test()
 		{
-			RunningApp.WaitForElement(c => c.Marked("Cell"));
+			RunningApp.WaitForFirstElement("Cell");
 
 			RunningApp.ActivateContextMenu("Cell");
 
-			RunningApp.WaitForElement(c => c.Marked("Self-Deleting item"));
+			RunningApp.WaitForFirstElement("Self-Deleting item");
 			RunningApp.Tap(c => c.Marked("Self-Deleting item"));
 		}
 #endif

@@ -1,6 +1,8 @@
 #if UITEST
 using System;
 using System.IO;
+using System.Linq;
+using Xamarin.Forms.Core.UITests;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
@@ -209,6 +211,16 @@ namespace Xamarin.Forms.Controls
 			TimeSpan? timeout = null, TimeSpan? retryFrequency = null, TimeSpan? postTimeout = null)
 		{
 			return _app.WaitForElement(query, timeoutMessage, timeout, retryFrequency, postTimeout);
+		}
+
+		public AppResult WaitForFirstElement(string marked, string timeoutMessage = "Timed out waiting for element...",
+			TimeSpan? timeout = null, TimeSpan? retryFrequency = null, TimeSpan? postTimeout = null)
+		{
+#if __WINDOWS__
+			return (_app as WinDriverApp).WaitForFirstElement(marked);
+#else
+			return _app.WaitForElement(marked, timeoutMessage).FirstOrDefault();
+#endif
 		}
 
 		public void WaitForNoElement(Func<AppQuery, AppQuery> query, string timeoutMessage = "Timed out waiting for no element...",
