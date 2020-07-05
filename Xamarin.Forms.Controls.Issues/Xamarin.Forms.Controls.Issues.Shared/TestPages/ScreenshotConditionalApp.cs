@@ -483,8 +483,11 @@ namespace Xamarin.Forms.Controls
 
 			if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
 			{
-				string filename = $"{TestContext.CurrentContext.Test.FullName}.png";
-				FileInfo file = _app.Screenshot(filename);
+				string title = TestContext.CurrentContext.Test.FullName
+					.Replace(".", "_")
+					.Replace(" ", "_");
+
+				FileInfo file = _app.Screenshot(title);
 
 				if (file != null)
 				{
