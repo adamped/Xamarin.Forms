@@ -1081,7 +1081,19 @@ IReadOnlyList<AppleSimulator> iosSimulators = null;
 AppleSimulator GetIosSimulator()
 {
     if(iosSimulators == null)
+    {
         iosSimulators = ListAppleSimulators ();
+        foreach (var s in iosSimulators)
+        {
+            Information("Info: {0} ({1} - {2} - {3})", s.Name, s.Runtime, s.UDID, s.Availability);
+        }
+
+        StartProcess("xcrun", new ProcessSettings {
+                    Arguments = new ProcessArgumentBuilder()
+                        .Append(@"simctl list")
+                    }
+                );
+    }
         
     // Look for a matching simulator on the system
     return iosSimulators.First (s => s.Name == IOS_SIM_NAME && s.Runtime == IOS_SIM_RUNTIME);
