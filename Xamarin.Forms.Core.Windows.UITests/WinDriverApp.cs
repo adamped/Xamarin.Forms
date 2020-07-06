@@ -24,7 +24,7 @@ namespace Xamarin.Forms.Core.UITests
 	public class WinDriverApp : IApp
 	{
 		public const string AppName = "Xamarin.Forms.ControlGallery.WindowsUniversal";
-		public static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(15);
+		public static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(20);
 
 		readonly Dictionary<string, string> _controlNameToTag = new Dictionary<string, string>
 		{

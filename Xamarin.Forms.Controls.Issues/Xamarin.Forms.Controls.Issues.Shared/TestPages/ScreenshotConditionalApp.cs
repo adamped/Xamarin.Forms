@@ -480,17 +480,15 @@ namespace Xamarin.Forms.Controls
 				AppSetup.EndIsolate();
 			}
 
-#if __WINDOWS__
 			ScreenshotFailure();
-#endif
 		}
 
-#if __WINDOWS__
 		public void ScreenshotFailure()
 		{
+#if __WINDOWS__
 			(_app as Core.UITests.WinDriverApp).ScreenshotFailure();
-		}
 #endif
+		}
 
 #if __IOS__
 

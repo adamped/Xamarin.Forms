@@ -96,6 +96,7 @@ namespace Xamarin.Forms.Controls.Issues
 		}
 
 		[Test]
+		[Category(UITestCategories.UwpIgnore)]
 		public void SafeAreaInsetsBreaksAndroidPadding()
 		{
 			// ensure initial paddings are honored

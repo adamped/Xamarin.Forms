@@ -51,6 +51,8 @@ namespace Xamarin.Forms.Core.UITests
 		[TearDown]
 		protected virtual void TestTearDown()
 		{
+			(App as ScreenshotConditionalApp)
+				.ScreenshotFailure();
 		}
 
 		protected abstract void NavigateToGallery();

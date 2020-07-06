@@ -26,7 +26,8 @@ namespace Xamarin.Forms.Controls.Issues
 			var tableSection = new TableSection();
 			var switchCell = new TextCell
 			{
-				Text = "Cell"
+				Text = "Cell",
+				AutomationId = "Cell"
 			};
 
 			var menuItem = new MenuItem
